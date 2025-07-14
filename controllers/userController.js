@@ -50,13 +50,36 @@ const login=async (req,res)=>{
     }
 } 
 
-const showusers=async(req,res)=>{
-    try{
-        const result = await userModel.find();
-        res.status(200).json(result);
-    }catch(err){}
+// const showusers=async(req,res)=>{
+//     try{
+//         const{ page=1,limit=3}= req.query;
+//         const result = await userModel.find().skip((page-1)).limit(limit);
+//        // const result = await userModel.find();
+//         res.status(200).json(result);
+//     }catch(err){
+//         console.log(err);
+//         res.status(400).json({message:"Something went wrong"});
+//     }
     
-}
+// }
+const showusers = async (req, res) => {
+  try {
+    const { page = 1, limit = 3, search = "" } = req.query;
+    const skip = (page - 1) * limit;
+    const count = await userModel.countDocuments({ firstName: { $regex: search, $options: "i" } });
+    const total = Math.ceil(count / limit);
+    const users = await userModel
+      .find({ firstName: { $regex: search, $options: "i" } })
+      .skip(skip)
+      .limit(limit)
+      .sort({updatedAt:-1})
+    res.status(200).json({ users, total });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
 
 const updateUser=async(req,res)=>{
     try{
