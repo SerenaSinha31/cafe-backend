@@ -6,7 +6,8 @@ import {
     showusers, 
     updateUser, 
     deleteUser, 
-    profileUser 
+    profileUser,
+    addUser  //addUser API for admin
 } from "../controllers/userController.js";
 
 const Router = express.Router();
@@ -28,6 +29,8 @@ Router.delete("/:id",deleteUser)
 
 //showing only one user details as admin API
 Router.get("/:id/profile",authenticate,profileUser)
+
+Router.post("/",addUser);
 
 export default Router;
 
