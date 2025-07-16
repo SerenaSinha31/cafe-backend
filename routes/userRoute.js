@@ -30,7 +30,7 @@ Router.delete("/:id",deleteUser)
 //showing only one user details as admin API
 Router.get("/:id/profile",authenticate,profileUser)
 
-Router.post("/",addUser);
+Router.post("/",authenticate,authorize("admin"),addUser);
 
 export default Router;
 
