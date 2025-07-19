@@ -9,7 +9,7 @@ const newOrder = async (req, res) => {
     console.log(err);
     res.status(500).json({ message: "Something went wrong" });
   }
-};
+}; 
 
 const showOrders = async (req, res) => {
   try {
@@ -17,10 +17,10 @@ const showOrders = async (req, res) => {
     const result = await orderModel.find({ email: id });
     res.status(200).json(result);
   } catch (err) {
-    console.log(err);
+    console.log(err);     
     res.status(500).json({ message: "Something went wrong" });
   }
-};
+};  
 
 const showAllOrders = async (req, res) => {
   try {

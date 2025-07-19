@@ -9,7 +9,7 @@ try
     token=token.split(" ")[1];
     const user = jwt.verify(token,SECRET);
     req.role = user.role;
-    next();
+    next();    
     }
 catch(err)
     {
@@ -23,7 +23,7 @@ const authorize=(role)=>{
         }else{
          return res.json({message: "ACCESS DENIED"});   
         }
-    };
+    }; 
 }
 
-export {authenticate, authorize};
+export {authenticate, authorize}; 

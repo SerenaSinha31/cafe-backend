@@ -34,4 +34,3 @@ Router.post("/",authenticate,authorize("admin"),addUser);
 
 export default Router;
 
-//tabnine
